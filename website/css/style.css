@@ -1,0 +1,68 @@
+/* CSS RESET */
+*{
+    margin:0px;
+    padding: 0px;
+}
+
+
+.header_section{
+    display: flex;
+    flex: 0 1 auto;
+    background-color: rgb(125 187 205);
+    opacity: 0.5;
+}
+.head_div{
+    width: 50%;
+    margin:10px 0px 0px 0px;
+    height: 38px;
+}
+.header_logo  h1{
+    margin-left:15px
+}
+
+.navlist{
+    display: flex;
+}
+
+.navlist li{
+    list-style: none;
+    margin: 5px 10px 5px 10px;
+    
+}
+
+.navlist a{
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    padding: 4px;
+}
+
+/* ------------------------------ */
+.main_section::before{
+    content: "";
+    background: url(../img/background_img.jpg) no-repeat center center/cover;
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    width: 100%;
+    z-index: -1;
+}
+.main_section{
+    display: flex;
+    flex-direction: row;
+    height: 550px;
+    /* background-color: rgb(196, 196, 196); */
+    /* margin: 20px; */
+    padding: 20px;
+    justify-content: center;
+    /* opacity: 0.1; */
+    /* align-items: center; */
+}
+
+.search_box{
+    
+    /* display: flex; */
+    height: 200px;
+    width: 400px;
+
+}
