@@ -94,37 +94,50 @@ def top_sentences(query, sentences, idfs, n):
     return keys[:n]
 
 
-query = "cricket"
-print(type(search(query, tld="co.in", num=10, stop=10, pause=2)))
+query = "samosa"
+print(type(search(query, tld="co.in", num=10, stop=5, pause=2)))
 l = []
 
-for j in search(query, tld="co.in", num=10, stop=10, pause=2):
+for j in search(query, tld="co.in", num=10, stop=5, pause=2):
   print(j)
   l.append(j)
-<<<<<<< HEAD
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-url = "https://en.wikipedia.org/wiki/Cricket"
-=======
-from urllib.request import urlopen
+#url = "https://en.wikipedia.org/wiki/Cricket"
+from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 url = l[0]
->>>>>>> 8a3ab627c5c6367de8a629c62877f5428b6b160e
-html = urlopen(url).read()
-soup = BeautifulSoup(html, features="html.parser")
+files = {}
 
-for script in soup(["script", "style"]):
-    script.extract() 
-<<<<<<< HEAD
+for site in l:
+    req = Request(
+        url=site, 
+        headers={'User-Agent': 'Mozilla/5.0'}
+    )
+    html = urlopen(req).read()
 
-text = soup.body.get_text()
-lines = (line.strip() for line in text.splitlines())
-chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-text = '\n'.join(chunk for chunk in chunks if chunk)
+    #html = urlopen(url=url, headers={'User-Agent': 'Mozilla/5.0'}).read()
 
-files = {"cricket" : text}
+    soup = BeautifulSoup(html, features="html.parser")
+
+    for script in soup(["script", "style"]):
+        script.extract() 
+
+
+    text = soup.body.get_text()
+    lines = (line.strip() for line in text.splitlines())
+    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+    text = '\n'.join(chunk for chunk in chunks if chunk)
+
+    files[site] = text
+#text = soup.body
+
+#for data in text.find_all("p"):
+#    text += data.get_text()
+
+
 #print(text)
 
 
@@ -162,13 +175,3 @@ idfs = compute_idfs(sentences)
 matches = top_sentences(query, sentences, idfs, n=SENTENCE_MATCHES)
 for match in matches:
     print(match)
-=======
-text = soup.body
-for data in text.find_all("p"):
-    print(data.get_text())
-    # text = da
-# lines = (line.strip() for line in text.splitlines())
-# chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-# text = '\n'.join(chunk for chunk in chunks if chunk)
-# print(text)
->>>>>>> 8a3ab627c5c6367de8a629c62877f5428b6b160e
